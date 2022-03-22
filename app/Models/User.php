@@ -45,7 +45,7 @@ class User extends Authenticatable
 
     public function categories()
     {
-        return $this->hasMany(category::class, 'staff_id', 'id');
+        return $this->hasMany(Category::class, 'staff_id', 'id');
     }
 
     public function subCategories()

@@ -5,33 +5,27 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SubCategory extends Model
+class Category extends Model
 {
     use HasFactory;
 
-    const HIDDEN = 1;
     const VISIBLE = 0;
+    const HIDDEN = 1;
 
     protected $fillable = [
         'name',
         'image_path',
         'staff_id',
-        'category_id',
         'is_hidden'
     ];
 
-    public function category()
-    {
-        return $this->belongsTo(Category::class);
-    }
-
     public function staff()
     {
-        return $this->belongsTo(User::class,'staff_id','id');
+        return $this->belongsTo(User::class, 'staff_id', 'id');
     }
 
-    public function products()
+    public function subCategories()
     {
-        return $this->hasMany(Product::class, 'sub_category_id', 'id');
+        return $this->hasMany(SubCategory::class);
     }
 }
