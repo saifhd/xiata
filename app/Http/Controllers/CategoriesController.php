@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CategoryRequest;
 use App\Http\Requests\categoryUpdateRequest;
-use App\Models\category;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
@@ -13,7 +13,7 @@ class CategoriesController extends Controller
 {
     public function index()
     {
-        $categories = category::query();
+        $categories = Category::query();
 
         if(auth()->user()->role->name == 'staff')
         {
@@ -44,7 +44,7 @@ class CategoriesController extends Controller
         return redirect()->route('categories.index')->with('success','Successfully Category Created');
     }
 
-    public function edit(category $category)
+    public function edit(Category $category)
     {
         if (!Gate::allows('category', $category)) {
             abort(403);

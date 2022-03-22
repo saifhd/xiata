@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\category;
+use App\Models\Category;
 use App\Models\SubCategory;
 use Livewire\Component;
 
@@ -15,9 +15,9 @@ class Categories extends Component
 
     public function mount()
     {
-        $this->categories = category::select('id', 'name')
+        $this->categories = Category::select('id', 'name')
             ->where('staff_id', auth()->user()->id)
-            ->where('is_hidden', category::VISIBLE)
+            ->where('is_hidden', Category::VISIBLE)
             ->get();
         if($this->selectedCategory)
         {

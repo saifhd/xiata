@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SubCategoryRequest;
 use App\Http\Requests\SubCategoryUpdateRequest;
-use App\Models\category;
+use App\Models\Category;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -29,9 +29,9 @@ class SubCategoriesController extends Controller
 
     public function create()
     {
-        $categories = category::select('id','name')
+        $categories = Category::select('id','name')
             ->where('staff_id',auth()->user()->id)
-            ->where('is_hidden', category::VISIBLE)
+            ->where('is_hidden', Category::VISIBLE)
             ->get();
         return view('sub_categories.create',[
             'categories' => $categories
@@ -57,9 +57,9 @@ class SubCategoriesController extends Controller
             abort(403);
         }
 
-        $categories = category::select('id', 'name')
+        $categories = Category::select('id', 'name')
             ->where('staff_id', auth()->user()->id)
-            ->where('is_hidden',category::VISIBLE)
+            ->where('is_hidden',Category::VISIBLE)
             ->get();
 
         return view('sub_categories.edit',[

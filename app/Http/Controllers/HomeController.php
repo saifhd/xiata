@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\InqueryRequest;
 use App\Mail\InqueryMail;
-use App\Models\category;
+use App\Models\Category;
 use App\Models\Image;
 use App\Models\Product;
 use App\Models\SubCategory;
@@ -15,8 +15,8 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $categories = category::query()
-            ->where('is_hidden',category::VISIBLE)
+        $categories = Category::query()
+            ->where('is_hidden',Category::VISIBLE)
             ->orderByDesc('id')
             ->paginate(15);
         return view('home',[
@@ -24,7 +24,7 @@ class HomeController extends Controller
         ]);
     }
 
-    public function showSubCategories(category $category)
+    public function showSubCategories(Category $category)
     {
         $sub_categories = SubCategory::query()
             ->where('category_id',$category->id)
@@ -38,7 +38,7 @@ class HomeController extends Controller
         ]);
     }
 
-    public function showProducts(category $category,SubCategory $sub_category)
+    public function showProducts(Category $category,SubCategory $sub_category)
     {
         $products = Product::select('id','name')
             ->where('sub_category_id',$sub_category->id)

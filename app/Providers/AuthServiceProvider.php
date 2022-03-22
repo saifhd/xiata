@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Models\category;
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\SubCategory;
 use App\Models\User;
@@ -33,7 +33,7 @@ class AuthServiceProvider extends ServiceProvider
             return $user->role->name === 'admin';
         });
 
-        Gate::define('category', function (User $user,category $category) {
+        Gate::define('category', function (User $user,Category $category) {
             return $user->role->name === 'admin' || $category->staff_id == $user->id;
         });
 
